@@ -39,7 +39,7 @@ export default function BreedForm({ onResult }: Props) {
 
     return (
         <div>
-            <label htmlFor="breed-select">Raza</label>
+            <label htmlFor="breed-select"></label>
                 <select
                 id="breed-select"
                 value={breed}
@@ -48,7 +48,7 @@ export default function BreedForm({ onResult }: Props) {
                     setSubBreed("");
                 }}
                 >
-                <option value="">Select Breed</option>
+                <option value="">Selecciona Raza</option>
                 {Object.keys(breeds).map((b) => (
                     <option key={b} value={b}>{b}</option>
                 ))}
