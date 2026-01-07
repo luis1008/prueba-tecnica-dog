@@ -12,6 +12,7 @@ export default function BreedForm({ onResult }: Props) {
   const [subBreed, setSubBreed] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const isSearchDisabled = breed === "" || loading;
 
     useEffect(() => {
         fetchBreeds().then(setBreeds).catch(() => setError("Error cargando razas"));
@@ -38,9 +39,15 @@ export default function BreedForm({ onResult }: Props) {
 
     return (
         <div>
-            <select value={breed} onChange={(e) => { setBreed(e.target.value); setSubBreed(""); 
-
-            }}>
+            <label htmlFor="breed-select">Raza</label>
+                <select
+                id="breed-select"
+                value={breed}
+                onChange={e => {
+                    setBreed(e.target.value);
+                    setSubBreed("");
+                }}
+                >
                 <option value="">Select Breed</option>
                 {Object.keys(breeds).map((b) => (
                     <option key={b} value={b}>{b}</option>
@@ -59,8 +66,12 @@ export default function BreedForm({ onResult }: Props) {
                     ))}     
             </select>
 
-            <button onClick={handleSearch} disabled={loading}>
-                Buscar
+            <button
+            type="button" 
+            onClick={handleSearch}
+            disabled={isSearchDisabled}
+            >
+            Buscar
             </button>
 
             {loading && <p>Loading...</p>}
