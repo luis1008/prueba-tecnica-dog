@@ -13,6 +13,7 @@ export default function BreedForm({ onResult }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const isSearchDisabled = breed === "" || loading;
+  const issubRazaDisabled = breed === "" || loading;
 
     useEffect(() => {
         fetchBreeds().then(setBreeds).catch(() => setError("Error cargando razas"));
@@ -55,8 +56,9 @@ export default function BreedForm({ onResult }: Props) {
             </select>
 
             <select
+                id="sub-breed-select"
                 value={subBreed}
-                disabled={!hasSubBreeds}
+                disabled={issubRazaDisabled}
                 onChange={(e) => setSubBreed(e.target.value)}
             >
                 <option value="">Selecciona Subraza</option>
